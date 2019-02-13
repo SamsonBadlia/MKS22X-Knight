@@ -3,6 +3,7 @@ public class KnightBoard{
 
   public static void main(String[] args) {
 
+    //Testing toString
     KnightBoard k = new KnightBoard(2,2);
     System.out.println(k);
 
@@ -15,15 +16,68 @@ public class KnightBoard{
     KnightBoard q = new KnightBoard(10,10);
     System.out.println(q);
 
+    //Testing addKnight
+    System.out.println(k.addKnight(0,0));
+    System.out.println("Should be true");
+    System.out.println("Grid:");
+    System.out.println(k);
+    System.out.println(k.addKnight(0,0));
+    System.out.println("Should be false");
+    System.out.println("Grid:");
+    System.out.println(k);
+    System.out.println(k.addKnight(3,0));
+    System.out.println("Should be Bad value false;");
+    System.out.println("Grid:");
+    System.out.println(k);
+    System.out.println(k.addKnight(1,1));
+    System.out.println("Should be true");
+    System.out.println("Grid:");
+    System.out.println(k);
+    System.out.println(k.addKnight(10,12));
+    System.out.println("Should be Bad value false");
+    System.out.println("Grid:");
+    System.out.println(k);
+
+
+
+
   }
 
   int[][] board;
+  int step;
 
   /**
   @throws IllegalArgumentException when either parameter is negative.
   **/
   public KnightBoard(int startingRows,int startingCols){
     board = new int[startingRows][startingCols];
+    step = 1;
+  }
+
+  public boolean addKnight(int r, int c){
+    try{
+      if (board[r][c] != 0) return false;
+      board[r][c] = step;
+      step++;
+      return true;
+    }
+  catch(IndexOutOfBoundsException e){
+      System.out.println("Bad value");
+    }
+    return false;
+  }
+
+  public boolean removeKnight(int r, int c){
+    try{
+      if (board[r][c] != 0) return false;
+      board[r][c] = 0;
+      step--;
+      return true;
+    }
+  catch(IndexOutOfBoundsException e){
+      System.out.println("Bad value");
+    }
+    return false;
   }
 
   public String toString(){
