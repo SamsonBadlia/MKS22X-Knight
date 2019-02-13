@@ -38,6 +38,16 @@ public class KnightBoard{
     System.out.println("Grid:");
     System.out.println(k);
 
+    //Testing removeKnight
+    System.out.println(k.removeKnight(1,1));
+    System.out.println("Should be true");
+    System.out.println("Grid:");
+    System.out.println(k);
+    System.out.println(k.addKnight(12,1));
+    System.out.println("Should be false Bad Value");
+    System.out.println("Grid:");
+    System.out.println(k);
+
 
 
 
@@ -69,7 +79,7 @@ public class KnightBoard{
 
   public boolean removeKnight(int r, int c){
     try{
-      if (board[r][c] != 0) return false;
+      if (board[r][c] == 0) return false;
       board[r][c] = 0;
       step--;
       return true;
