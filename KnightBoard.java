@@ -12,6 +12,9 @@ public class KnightBoard{
     KnightBoard m = new KnightBoard(5,2);
     System.out.println(m);
 
+    KnightBoard q = new KnightBoard(10,10);
+    System.out.println(q);
+
   }
 
   int[][] board;
@@ -27,7 +30,8 @@ public class KnightBoard{
     String s = "\n";
     for (int i = 0; i < board.length; i++){
       for (int j = 0; j < board[i].length;j++){
-        s += " 0 ";
+        if (board.length * board[0].length >= 10) s += " _" ;
+        s += board[i][j] + " ";
         if (j == board[i].length - 1) s += "\n";
       }
     }
