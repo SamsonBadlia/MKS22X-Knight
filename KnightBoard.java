@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class KnightBoard{
 
 
@@ -47,9 +49,6 @@ public class KnightBoard{
     System.out.println("Should be false Bad Value");
     System.out.println("Grid:");
     System.out.println(k);
-
-
-
 
   }
 
@@ -119,6 +118,11 @@ public class KnightBoard{
       return true;
     }
 
+  private boolean safe(int r, int c){
+    if (r < board.length || c < board[0].length || r >= 0 || c >= 0) return true;
+    return false;
+  }
+
 
  /**
   @throws IllegalStateException when the board contains non-zero values.
@@ -127,8 +131,27 @@ public class KnightBoard{
   public boolean solve(int startingRow, int startingCol){
     if (!empty()) throw new IllegalStateException();
     if (startingRow < 0 || startingCol < 0 || startingRow > board.length || startingCol > board[0].length) throw new IllegalArgumentException();
-    return true;
+    return solveR(0,0,1);
    }
+
+   private boolean solveR(int r, int c, int move){
+     // tracks coordinate of next square
+     int x,y;
+    if (move == board.length * board[0].length) return true;
+    //all possible moves in x,y format
+    int[] moves = { 2,1, 1,2, -1,2, -2,1, -2,-1, -1,-2, 1,-2, 2,-1};
+    for (int i = 0; i < board.length; i+= 2 ){
+      //location of next spot
+      x = r + moves[i];
+      y = c + moves[i+1];
+      if (safe(x,y)){
+        board[x][y] = move;
+        if (solveR(x,y,move + 1)) return true;
+        
+      }
+    }
+    return false;
+}
 
   /**
   @throws IllegalStateException when the board contains non-zero values.
