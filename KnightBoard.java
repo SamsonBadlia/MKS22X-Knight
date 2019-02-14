@@ -122,7 +122,7 @@ public class KnightBoard{
      y = c + moves[i+1];
      //checks if knight can be moved there
      if (addKnight(x,y,move)){
-       count += countR(r,c,move+1);
+       count += countR(x,y,move+1);
        removeKnight(x,y);
      }
    }
