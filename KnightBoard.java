@@ -4,14 +4,19 @@ public class KnightBoard{
 
 
   public static void main(String[] args) {
-      KnightBoard kb = new KnightBoard(5, 5);
-      long timeStart = System.currentTimeMillis();
-      int solutionsFound = 0;
-      for(int i = 0; i < 5; i++){
-          for(int j = 0; j < 5; j++){
-              solutionsFound += kb.countSolutions(i, j);
-          }
-      }
+
+    KnightBoard i = new KnightBoard(1,1);
+    KnightBoard ii = new KnightBoard(2,2);
+    KnightBoard iii = new KnightBoard(3,3);
+    KnightBoard v = new KnightBoard(5,5);
+
+    System.out.println(i.solve(0,0));
+    System.out.println(v.solve(1,1));
+    System.out.println(iii.solve(0,0));
+    System.out.println(v.countSolutions(0,0));
+    System.out.println();
+
+
     }
 
   int[][] board;
@@ -29,10 +34,8 @@ public class KnightBoard{
   public boolean addKnight(int r, int c, int step){
       if (r < 0 || c < 0 || r >= board.length || c >= board[0].length) return false;
       if (board[r][c] != 0) return false;
-      else{
-        board[r][c] = step;
-        return true;
-      }
+      board[r][c] = step;
+      return true;
   }
 
   public boolean removeKnight(int r, int c){
@@ -80,12 +83,12 @@ public class KnightBoard{
    private boolean solveR(int r, int c, int move){
      // tracks coordinate of next square
     int x,y;
-    if (move == board.length * board[0].length) return true;
+    if (move >= board.length * board[0].length) return true;
     //incrementing by 2 because the array is a pair of values (x,y)
     for (int i = 0; i < moves.length - 1; i++ ){
       //checks if knight can be moved there
       x = r + moves[i][0];
-      y = c + moves[i + 1][0];
+      y = c + moves[i][1];
       if (addKnight(x,y,move)){
         if (solveR(x,y,move + 1)) return true;
         else{
@@ -110,12 +113,12 @@ public class KnightBoard{
 
   private int countR(int r, int c, int move){
    int count = 0;
-   if (move >= board.length * board[0].length) return 1;
+   if (move == board.length * board[0].length) return 1;
    //incrementing by 2 because the array is a pair of values (x,y)
    for (int i = 0; i < moves.length - 1  ; i++){
      //checks if knight can be moved there
      int x = r + moves[i][0];
-     int y = c + moves[i + 1][0];
+     int y = c + moves[i][1];
      if (addKnight(x,y, move)){
        count += countR(x,y , move+1);
        removeKnight(x,y);
