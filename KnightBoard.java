@@ -4,19 +4,30 @@ public class KnightBoard{
 
 
   public static void main(String[] args) {
-
+/*
     KnightBoard i = new KnightBoard(1,1);
     KnightBoard ii = new KnightBoard(2,2);
     KnightBoard iii = new KnightBoard(3,3);
     KnightBoard v = new KnightBoard(5,5);
-
+    KnightBoard a = new KnightBoard(20,20);
+    KnightBoard b = new KnightBoard(35,35);
+    KnightBoard c = new KnightBoard(45,45);
     System.out.println(i.solve(0,0));
+    System.out.println(a.solve(0,0));
+    System.out.println(b.solve(0,0));
+    System.out.println(c.solve(0,0));
     System.out.println(v.solve(1,1));
     System.out.println(iii.solve(0,0));
     System.out.println(v.countSolutions(0,0));
     System.out.println(v.countSolutions(2,2));
 
     System.out.println();
+*/
+    runTest(1);
+    runTest(2);
+    runTest(3);
+    runTest(4);
+    runTest(0);
 
 
     }
@@ -125,6 +136,34 @@ public class KnightBoard{
      }
    }
    return count;
+}
+
+//testcase must be a valid index of your input/output array
+public static void runTest(int i){
+
+  KnightBoard b;
+  int[]m =   {4,5,5,5,5};
+  int[]n =   {4,5,4,5,5};
+  int[]startx = {0,0,0,1,2};
+  int[]starty = {0,0,0,1,2};
+  int[]answers = {0,304,32,56,64};
+  if(i >= 0 ){
+    try{
+      int correct = answers[i];
+      b = new KnightBoard(m[i%m.length],n[i%m.length]);
+
+      int ans  = b.countSolutions(startx[i],starty[i]);
+
+      if(correct==ans){
+        System.out.println("PASS board size: "+m[i%m.length]+"x"+n[i%m.length]+" "+ans);
+      }else{
+        System.out.println("FAIL board size: "+m[i%m.length]+"x"+n[i%m.length]+" "+ans+" vs "+correct);
+      }
+    }catch(Exception e){
+      System.out.println("FAIL Exception case: "+i);
+
+    }
+  }
 }
 
 
